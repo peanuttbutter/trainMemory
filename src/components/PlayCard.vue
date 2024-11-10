@@ -1,13 +1,13 @@
 <script lang="ts" setup>
-import { defineProps } from 'vue'
-
+import { defineProps, defineEmits } from 'vue'
 import type { Card } from '../types/card'
 
-const props = defineProps<{ card: Card; onFlip: () => void }>()
+const props = defineProps<{ card: Card }>()
+const emit = defineEmits<{ (e: 'flip'): void }>()
 
 function flipCard(): void {
   if (!props.card.isMatched && !props.card.isFlipped) {
-    props.onFlip()
+    emit('flip')
   }
 }
 </script>

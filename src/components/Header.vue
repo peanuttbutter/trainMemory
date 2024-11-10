@@ -1,9 +1,7 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
-
 import ModalRules from './ModalRules.vue'
 import { useGameStore } from '../assets/data/gameStore'
-
 const gameStore = useGameStore()
 const showModal = ref<boolean>(false)
 </script>
@@ -17,7 +15,7 @@ const showModal = ref<boolean>(false)
       <p class="text-xl sm:text-2xl font-bold">{{ gameStore.score }}/30</p>
     </div>
     <button @click="showModal = true" class="cursor-pointer hover:opacity-70 mt-2 sm:mt-0">
-      <font-awesome-icon icon="circle-question" size="xl" sm:size="2xl" style="color: #7651e6" />
+      <font-awesome-icon icon="circle-question" size="xl" style="color: #7651e6" />
     </button>
     <transition>
       <ModalRules v-if="showModal" @close="showModal = false" />
@@ -30,7 +28,6 @@ const showModal = ref<boolean>(false)
 .v-leave-active {
   transition: opacity 0.5s ease;
 }
-
 .v-enter-from,
 .v-leave-to {
   opacity: 0;

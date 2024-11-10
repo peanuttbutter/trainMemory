@@ -1,32 +1,39 @@
 <script lang="ts" setup>
 import { ref, watch } from 'vue'
-
 import PlayCard from './PlayCard.vue'
 import StartGameButton from './StartGameButton.vue'
-
 import { icons } from '../assets/data/icons'
 import { useGameStore } from '../assets/data/gameStore'
-
 import type { Card } from '../types/card'
 import confetti from 'canvas-confetti'
 
 const gameStore = useGameStore()
 const cards = ref<Card[]>([])
 const flippedCards = ref<Card[]>([])
-const isCheckingMatch = ref(false)
+const isCheckingMatch = ref<boolean>(false)
 
-function initializeCards() {
-  const iconPairs = [...icons, ...icons]
-  iconPairs.sort(() => 0.5 - Math.random())
-  cards.value = iconPairs.map((icon, index) => ({
-    id: index,
-    icon,
-    isFlipped: false,
-    isMatched: false,
-  }))
+function shuffleArray<T>(array: T[]): T[] {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j: number = Math.floor(Math.random() * (i + 1))
+    ;[array[i], array[j]] = [array[j], array[i]]
+  }
+  return array
 }
 
-function launchConfetti() {
+function initializeCards(): void {
+  const iconPairs: string[] = [...icons, ...icons]
+  shuffleArray(iconPairs)
+  cards.value = iconPairs.map(
+    (icon: string, index: number): Card => ({
+      id: index,
+      icon,
+      isFlipped: false,
+      isMatched: false,
+    }),
+  )
+}
+
+function launchConfetti(): void {
   confetti({
     particleCount: 100,
     startVelocity: 30,
@@ -38,12 +45,12 @@ function launchConfetti() {
 
 watch(
   () => gameStore.isGameStarted,
-  (newValue) => {
+  (newValue: boolean) => {
     if (newValue) {
       initializeCards()
       cards.value.forEach((card) => (card.isFlipped = true))
 
-      setTimeout(() => {
+      setTimeout((): void => {
         cards.value.forEach((card) => {
           if (!card.isMatched) {
             card.isFlipped = false
@@ -57,7 +64,7 @@ watch(
 
 watch(
   () => gameStore.score,
-  (newValue) => {
+  (newValue: number) => {
     if (newValue === gameStore.totalPairs * 2) {
       launchConfetti()
       setTimeout(() => {
@@ -67,7 +74,7 @@ watch(
   },
 )
 
-function flipCard(card: Card) {
+async function flipCard(card: Card): Promise<void> {
   if (isCheckingMatch.value || card.isFlipped || card.isMatched) {
     return
   }
@@ -77,27 +84,24 @@ function flipCard(card: Card) {
 
   if (flippedCards.value.length === 2) {
     isCheckingMatch.value = true
-    checkForMatch()
+    await checkForMatch()
   }
 }
 
-function checkForMatch() {
+async function checkForMatch(): Promise<void> {
   const [firstCard, secondCard] = flippedCards.value
   if (firstCard.icon === secondCard.icon) {
     firstCard.isMatched = true
     secondCard.isMatched = true
     gameStore.incrementScore()
   } else {
-    setTimeout(() => {
-      firstCard.isFlipped = false
-      secondCard.isFlipped = false
-    }, 1000)
+    await new Promise((resolve) => setTimeout(resolve, 1000))
+    firstCard.isFlipped = false
+    secondCard.isFlipped = false
   }
 
-  setTimeout(() => {
-    flippedCards.value = []
-    isCheckingMatch.value = false
-  }, 1000)
+  flippedCards.value = []
+  isCheckingMatch.value = false
 }
 </script>
 
@@ -109,7 +113,7 @@ function checkForMatch() {
       class="max-w-5xl mx-auto grid grid-cols-6 gap-2 relative"
       :class="{ 'blur-md pointer-events-none': !gameStore.isGameStarted }"
     >
-      <PlayCard v-for="card in cards" :key="card.id" :card="card" :onFlip="() => flipCard(card)" />
+      <PlayCard v-for="card in cards" :key="card.id" :card="card" @flip="flipCard(card)" />
     </div>
   </div>
 </template>
