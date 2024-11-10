@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 
-import type { Card } from '../../types/card'
+import type { Card } from '../../types/Card'
 import { icons } from './icons'
 
 interface GameState {
@@ -23,13 +23,13 @@ export const useGameStore = defineStore('game', {
   }),
 
   actions: {
-    startGame(): void {
+    startGame() {
       this.isGameStarted = true
       this.score = 0
       this.initializeCards()
     },
 
-    resetGame(): void {
+    resetGame() {
       this.isGameStarted = false
       this.score = 0
       this.cards = []
@@ -37,18 +37,18 @@ export const useGameStore = defineStore('game', {
       this.isCheckingMatch = false
     },
 
-    incrementScore(): void {
+    incrementScore() {
       this.score += 2
       if (this.score === this.totalPairs * 2) {
         this.triggerWin()
       }
     },
 
-    triggerWin(): void {
+    triggerWin() {
       this.isGameStarted = false
     },
 
-    initializeCards(): void {
+    initializeCards() {
       const iconPairs: string[] = [...icons, ...icons]
       this.shuffleArray(iconPairs)
       this.cards = iconPairs.map(
@@ -78,7 +78,7 @@ export const useGameStore = defineStore('game', {
       return array
     },
 
-    flipCard(cardId: number): void {
+    flipCard(cardId: number) {
       if (this.isCheckingMatch) return
       const card = this.cards.find((c) => c.id === cardId)
       if (!card || card.isFlipped || card.isMatched) return
@@ -90,7 +90,7 @@ export const useGameStore = defineStore('game', {
       }
     },
 
-    async checkForMatch(): Promise<void> {
+    async checkForMatch() {
       this.isCheckingMatch = true
       const [firstCard, secondCard] = this.flippedCards
 

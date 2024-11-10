@@ -3,7 +3,7 @@ import { useGameStore } from '../assets/data/gameStore'
 
 const gameStore = useGameStore()
 
-function startGame(): void {
+function startGame() {
   gameStore.startGame()
 }
 </script>
@@ -18,4 +18,3 @@ function startGame(): void {
     </button>
   </div>
 </template>
-

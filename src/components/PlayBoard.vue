@@ -13,7 +13,7 @@ const cards = computed(() => gameStore.cards)
 
 watch(
   () => gameStore.score,
-  (newValue: number) => {
+  (newValue) => {
     if (newValue === gameStore.totalPairs * 2) {
       launchConfetti()
       setTimeout(() => {
@@ -23,14 +23,28 @@ watch(
   },
 )
 
-function launchConfetti(): void {
-  confetti({
-    particleCount: 100,
-    startVelocity: 30,
-    spread: 360,
-    origin: { y: 1 },
-    colors: ['#ff9a9e', '#fad0c4', '#fbc2eb', '#8fd3f4', '#a6c1ee'],
-  })
+function launchConfetti() {
+  const duration = 3000
+  const end = Date.now() + duration
+
+  const colors = ['#ff9a9e', '#fad0c4', '#fbc2eb', '#8fd3f4', '#a6c1ee']
+  ;(function frame() {
+    confetti({
+      particleCount: 3,
+      startVelocity: 30,
+      ticks: 200,
+      spread: 360,
+      origin: {
+        x: Math.random(),
+        y: Math.random() - 0.2,
+      },
+      colors: colors,
+    })
+
+    if (Date.now() < end) {
+      requestAnimationFrame(frame)
+    }
+  })()
 }
 </script>
 

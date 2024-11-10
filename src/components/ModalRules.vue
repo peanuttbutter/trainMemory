@@ -5,8 +5,9 @@ const emit = defineEmits<{ (e: 'close'): void }>()
 
 const currentStep = ref<number>(1)
 
-function nextStep(): void {
-  currentStep.value = currentStep.value === 1 ? 2 : 1
+function nextStep() {
+  const step = currentStep.value === 1 ? 2 : 1
+  currentStep.value = step
 }
 </script>
 
@@ -35,7 +36,7 @@ function nextStep(): void {
           Правила игры
         </h2>
 
-        <div class="px-1 sm:px-2 text-base sm:text-lg text-center">
+        <div class="px-1 sm:px-2 text-base sm:text-lg">
           <p v-show="currentStep === 1">
             Цель игры: запомнить расположение одинаковых карточек, которые разложены случайным
             образом. <br />
