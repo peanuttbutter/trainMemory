@@ -1,39 +1,34 @@
-# trainmemory
+<h1 align="center">Игра "Тренируй Память" &#129504;</h1>
 
-This template should help get you started developing with Vue 3 in Vite.
+<h2 align="left">Описание проекта</h2>
 
-## Recommended IDE Setup
+**"Тренируй Память"** — простая игра на развитие памяти, которая поможет улучшить концентрацию внимания.
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+**Цель игры** — найти все пары одинаковых карточек, расположенных случайным образом на игровом поле.
 
-## Type Support for `.vue` Imports in TS
+<h2 align="left">Использованные технологии</h2>
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+- **Vue 3 Composition API**;
+- **TypeScript**;
+- **Tailwind CSS**;
+- **Pinia**;
+- **Font Awesome**;
+- **canvas-confetti**.
 
-## Customize configuration
+<h2 align="left">Правила игры</h2>
+Карточки раскладываются на экране случайным образом рубашкой вверх. Игрок открывает  две карточки. Если цвет на них совпадает, то они остаются открытыми, и игрок открывает следующие две карточки. Если карточки не совпадают по цвету, то обе карточки переворачиваются обратно, и игрок заново начинает ход.</br>
+Игра заканчивается, когда все карты на столе открыты.
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+<h2 align="left">Как играть</h2>
 
-## Project Setup
+1. Нажмите на кнопку **"Начать играть"** на главном экране.
+2. В начале игры все карточки будут открыты, попытайтесь запомнить расположение одинаковых карточек.
+3. Кликайте по карточкам, чтобы переворачивать их. За один ход можно перевернуть две карточки.
+4. Проверка на совпадение:
+   - Если изображения на перевернутых карточках совпадают, они остаются открытыми.
+   - Если не совпадают, карточки переворачиваются обратно через короткое время.
+5. Игра завершается, когда все пары найдены.
+6. После завершения вы можете начать новую игру, нажав кнопку **"Начать играть"**.
 
-```sh
-npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Type-Check, Compile and Minify for Production
-
-```sh
-npm run build
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
+<h2 align="left">Сборка проекта</h2>
+https://peanuttbutter.github.io/trainMemory/

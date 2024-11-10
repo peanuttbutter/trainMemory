@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import Header from './components/Header.vue'
-import PlayBoard from './components/PlayBoard.vue'
+import PlayBoard from './modules/card/views/PlayBoard.vue'
 </script>
 
 <template>

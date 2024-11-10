@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { useGameStore } from '../assets/data/gameStore'
+import { useGameStore } from '../modules/card/store/gameStore'
 
 const gameStore = useGameStore()
 

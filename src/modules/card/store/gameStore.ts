@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 
-import type { Card } from '../../types/Card'
-import { icons } from './icons'
+import type { Card } from '../../../types/Card'
+import { icons } from '../../../assets/data/icons'
 
 interface GameState {
   score: number

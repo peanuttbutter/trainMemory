@@ -1,10 +1,10 @@
 <script lang="ts" setup>
 import { computed, watch } from 'vue'
 
-import PlayCard from './PlayCard.vue'
-import StartGameButton from './StartGameButton.vue'
+import PlayCard from '../../../components/PlayCard.vue'
+import StartGameButton from '../../../components/StartGameButton.vue'
 
-import { useGameStore } from '../assets/data/gameStore'
+import { useGameStore } from '../store/gameStore'
 import confetti from 'canvas-confetti'
 
 const gameStore = useGameStore()
@@ -24,7 +24,7 @@ watch(
 )
 
 function launchConfetti() {
-  const duration = 3000
+  const duration = 2500
   const end = Date.now() + duration
 
   const colors = ['#ff9a9e', '#fad0c4', '#fbc2eb', '#8fd3f4', '#a6c1ee']
