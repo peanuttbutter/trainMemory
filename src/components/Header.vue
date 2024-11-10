@@ -1,7 +1,9 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
+
 import ModalRules from './ModalRules.vue'
 import { useGameStore } from '../assets/data/gameStore'
+
 const gameStore = useGameStore()
 const showModal = ref<boolean>(false)
 </script>
@@ -12,7 +14,7 @@ const showModal = ref<boolean>(false)
   >
     <div class="flex flex-col sm:flex-row items-center sm:items-end gap-2 sm:gap-7 mx-auto">
       <h1 class="text-2xl sm:text-3xl font-bold text-center sm:text-left">Тренируй память</h1>
-      <p class="text-xl sm:text-2xl font-bold">{{ gameStore.score }}/30</p>
+      <p class="text-xl sm:text-2xl font-bold">{{ gameStore.score }}/{{ gameStore.totalPairs * 2 }}</p>
     </div>
     <button @click="showModal = true" class="cursor-pointer hover:opacity-70 mt-2 sm:mt-0">
       <font-awesome-icon icon="circle-question" size="xl" style="color: #7651e6" />

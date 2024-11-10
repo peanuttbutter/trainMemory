@@ -18,3 +18,4 @@ function startGame(): void {
     </button>
   </div>
 </template>
+
