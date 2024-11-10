@@ -1,0 +1,17 @@
+export const icons: string[] = [
+  'heart',
+  'paw',
+  'cat',
+  'cannabis',
+  'ghost',
+  'hat-wizard',
+  'gear',
+  'cloud',
+  'snowflake',
+  'moon',
+  'volcano',
+  'dog',
+  'eye',
+  'radiation',
+  'bone',
+]
